@@ -1,0 +1,123 @@
+{
+  "searchFilters": [
+    {
+      "id": 1,
+      "name": "завтрак",
+      "isSelected": false
+    },
+    {
+      "id": 2,
+      "name": "обед",
+      "isSelected": false
+    },
+    {
+      "id": 3,
+      "name": "ужин",
+      "isSelected": false
+    },
+    {
+      "id": 4,
+      "name": "десерт",
+      "isSelected": false
+    },
+    {
+      "id": 5,
+      "name": "мясо",
+      "isSelected": false
+    },
+    {
+      "id": 6,
+      "name": "рыба",
+      "isSelected": false
+    },
+    {
+      "id": 7,
+      "name": "напитки",
+      "isSelected": false
+    },
+    {
+      "id": 8,
+      "name": "горячее",
+      "isSelected": false
+    },
+    {
+      "id": 9,
+      "name": "холодное",
+      "isSelected": false
+    },
+    {
+      "id": 10,
+      "name": "закуска",
+      "isSelected": false
+    },
+    {
+      "id": 11,
+      "name": "углеводы",
+      "isSelected": false
+    },
+    {
+      "id": 12,
+      "name": "выпечка",
+      "isSelected": false
+    }
+  ],
+  "recipesPreview": [
+    {
+      "id": 1,
+      "rating": 4.3,
+      "time": 30,
+      "portionsNumber": 4,
+      "name": "Блины с творогом",
+      "imgName": "blini-with-quark",
+      "isFavorite": true,
+      "filters": [
+        "десерт"
+      ]
+    },
+    {
+      "id": 2,
+      "rating": 4.5,
+      "time": 150,
+      "portionsNumber": 6,
+      "name": "Борщ с яблоками",
+      "imgName": "borscht-with-apples",
+      "isFavorite": false,
+      "filters": [
+        "десерт"
+      ]
+    },
+    {
+      "id": 3,
+      "rating": 4.5,
+      "time": 480,
+      "portionsNumber": 8,
+      "name": "Тирамису",
+      "imgName": "tiramisu",
+      "isFavorite": false
+    },
+    {
+      "id": 4,
+      "rating": 4.7,
+      "time": 50,
+      "portionsNumber": 12,
+      "name": "Кексы с вишней",
+      "imgName": "cupcakes-with-cherries",
+      "isFavorite": false
+    },
+    {
+      "id": 5,
+      "rating": 4.9,
+      "time": 5,
+      "portionsNumber": 1,
+      "name": "Творог с бананом",
+      "imgName": "cottage-cheese-with-banana",
+      "isFavorite": true,
+      "filters": [
+        "десерт"
+      ]
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

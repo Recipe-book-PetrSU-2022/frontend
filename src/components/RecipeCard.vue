@@ -1,5 +1,5 @@
 <template>
-  <div class="px-2.5 w-48 h-72 rounded border border-gray">
+  <div class="px-2.5 w-48 h-72 flex flex-col rounded border border-gray">
     <div class="relative mt-2.5 w-[170px] h-44 rounded">
       <div class="relative z-10 flex justify-between">
         <div
@@ -10,16 +10,18 @@
         </div>
         <div
           class="w-9 h-6 flex items-center justify-center bg-main border border-gray rounded-tr rounded-bl hover:cursor-pointer"
+          @click="addToFavorite"
         >
-          <vue-feather type="bookmark" size="20" />
+          <vue-feather v-if="!isFavoriteLocal" type="bookmark" size="20" />
+          <vue-feather v-else type="bookmark" fill="#EA7F70" size="20" />
         </div>
       </div>
-      <img class="absolute top-0" src="@/assets/icons/blini.svg" alt="" />
+      <img class="absolute top-0 select-none" :src="getImgUrl(props.imgName)" alt="" />
     </div>
     <div class="flex flex-wrap width-[170px] text-xl font-bold">
       {{ props.name }}
     </div>
-    <div class="flex justify-between">
+    <div class="mt-auto mb-2.5 flex justify-between">
       <div class="font-bold">{{ props.portionsNumber }} пор</div>
       <div class="font-bold">{{ props.time }} мин</div>
     </div>
@@ -33,7 +35,7 @@
   import { useAuthStore } from '@/stores/auth';
   import { useRouter } from 'vue-router';
 
-  // import axios from 'axios';
+  import axios from 'axios';
 
   interface Filter {
     name: string;
@@ -43,25 +45,37 @@
 
   // eslint-disable-next-line no-undef
   const props = defineProps({
+    id: Number,
     name: String,
     rating: Number,
     isFavorite: Boolean,
     time: Number,
     portionsNumber: Number,
+    imgName: String,
   });
 
-  const auth = useAuthStore();
-  const router = useRouter();
+  const isFavoriteLocal: Ref<boolean> = ref(false);
 
-  const hasAuthError: Ref<Boolean> = ref(false);
+  if (props.isFavorite) {
+    isFavoriteLocal.value = true;
+  }
 
-  function setBackgroundColor(filter: Filter) {
-    if (!filter.isSelected) return;
+  function getImgUrl(imgName: string) {
+    return new URL(`../assets/icons/recipesPreview/${imgName}.svg`, import.meta.url).href;
+  }
 
-    const colors: Array<string> = ['bg-light-red', 'bg-light-yellow', 'bg-light-green'];
+  function addToFavorite() {
+    isFavoriteLocal.value = !isFavoriteLocal.value;
 
-    // eslint-disable-next-line no-param-reassign
-    filter.bgColor = colors[Math.floor(3 * Math.random())];
+    axios.put(
+      `/recipesPreview/${props.id}`,
+      { ...props, isFavorite: !props.isFavorite },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
   }
 </script>
 
