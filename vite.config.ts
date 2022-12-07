@@ -6,7 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'Recipe-book-PetrSU-2022/frontend',
+  base: 'recipe-book-petrsu-2022/frontend',
   plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
