@@ -1,5 +1,8 @@
 <template>
-  <div class="px-2.5 w-48 h-72 flex flex-col rounded border border-gray">
+  <div
+    class="px-2.5 w-48 h-72 flex flex-col rounded border border-gray hover:cursor-pointer"
+    @click="router.push({ name: 'RecipePage', params: { id: props.id } })"
+  >
     <div class="relative mt-2.5 w-[170px] h-44 rounded">
       <div class="relative z-10 flex justify-between">
         <div
@@ -9,8 +12,8 @@
           <vue-feather type="star" size="9" />
         </div>
         <div
-          class="w-9 h-6 flex items-center justify-center bg-main border border-gray rounded-tr rounded-bl hover:cursor-pointer"
-          @click="addToFavorite"
+          class="w-9 h-6 flex items-center justify-center bg-main border border-gray rounded-tr rounded-bl hover:cursor-pointer hover:outline hover:outline-1"
+          @click.stop="addToFavorite"
         >
           <vue-feather v-if="!isFavoriteLocal" type="bookmark" size="20" />
           <vue-feather v-else type="bookmark" fill="#EA7F70" size="20" />
@@ -18,7 +21,7 @@
       </div>
       <img class="absolute top-0 select-none" :src="getImgUrl(props.imgName)" alt="" />
     </div>
-    <div class="flex flex-wrap width-[170px] text-xl font-bold">
+    <div class="flex flex-wrap width-[170px] text-xl font-bold select-none">
       {{ props.name }}
     </div>
     <div class="mt-auto mb-2.5 flex justify-between">
@@ -29,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, type PropType } from 'vue';
   import type { Ref } from 'vue';
 
   import { useAuthStore } from '@/stores/auth';
@@ -52,8 +55,10 @@
     time: Number,
     portionsNumber: Number,
     imgName: String,
+    filters: Array as PropType<String[]>,
   });
 
+  const router = useRouter();
   const isFavoriteLocal: Ref<boolean> = ref(false);
 
   if (props.isFavorite) {

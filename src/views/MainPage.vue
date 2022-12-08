@@ -1,75 +1,54 @@
 <template>
-  <div class="mx-auto flex-col max-w-6xl">
-    <div class="mt-12 w-[1160px] flex">
-      <div class="text-black text-3xl font-extrabold">Кулинарная книга</div>
-      <input
-        class="ml-28 pl-2.5 w-[512px] border border-gray placeholder:text-gray"
-        placeholder="Введите название рецепта..."
-        name="searchRecipe"
-        v-model="searchString"
-      />
-      <!--
-      <button class="ml-2.5 w-16 h-9 border border-gray font-sans text-gray" type="submit">
-        Искать
-      </button>
-      -->
-      <vue-feather class="w-12 h-9 text-gray" type="search" size="20" />
-      <button
-        class="ml-auto mr-1 w-10 h-9 flex items-center justify-center bg-gray rounded hover:cursor-pointer"
-      >
-        <vue-feather type="log-out" size="20" stroke="white" />
-      </button>
-    </div>
-    <div class="mt-12 text-2xl font-extrabold">Фильтры поиска</div>
-    <div class="mt-8 flex flex-wrap gap-2.5">
-      <!-- eslint-disable-next-line vue/require-v-for-key-->
-      <div
-        v-for="filter in filters"
-        :key="filter.name + 1"
-        class="h-7 flex items-center justify-center select-none rounded border-2 border-gray hover:cursor-pointer"
-        @click="selectFilter(filter)"
-      >
-        <div v-if="!filter.isSelected" class="rounded">
-          <span class="px-2.5">{{ filter.name }}</span>
-        </div>
+  <div class="mt-12 text-2xl font-extrabold">Фильтры поиска</div>
+  <div class="mt-8 flex flex-wrap gap-2.5">
+    <!-- eslint-disable-next-line vue/require-v-for-key-->
+    <div
+      v-for="filter in filters"
+      :key="filter.name + 1"
+      class="h-7 flex items-center justify-center select-none rounded border-2 border-gray hover:cursor-pointer hover:outline hover:outline-1"
+      @click="selectFilter(filter)"
+    >
+      <div v-if="!filter.isSelected" class="rounded">
+        <span class="px-2.5">{{ filter.name }}</span>
+      </div>
 
-        <div v-else class="flex items-center justify-center gap-1.5" :class="filter.bgColor">
-          <span class="px-2.5">{{ filter.name }}</span>
-          <vue-feather type="x" size="18" />
-        </div>
+      <div v-else class="flex items-center justify-center gap-1.5" :class="filter.bgColor">
+        <span class="px-2.5">{{ filter.name }}</span>
+        <vue-feather type="x" size="18" />
       </div>
     </div>
-    <hr class="mt-9 border-b border-dashed" />
-    <div class="mt-12 flex items-end">
-      <div class="text-2xl font-extrabold">Результаты поиска</div>
-      <div class="ml-5 flex font-sans">Найдено {{ recipesSearchResult.length }} рецептов</div>
-      <select
-        class="ml-auto p-2.5 bg-gray text-main text-base rounded hover:cursor-pointer focus:ring-blue-500 focus:border-blue-500"
-        v-model="sortParameter"
-      >
-        <option value="popular" selected>сначала популярные</option>
-        <option value="fast">сначала быстрые</option>
-        <option value="long">сначала долгие</option>
-      </select>
-    </div>
-    <div class="mt-7 flex flex-wrap gap-x-12 gap-y-8">
-      <RecipeCard
-        v-for="recipe in recipesSearchResult"
-        :key="recipe.id"
-        :id="recipe.id"
-        :rating="recipe.rating"
-        :time="recipe.time"
-        :portions-number="recipe.portionsNumber"
-        :is-favorite="recipe.isFavorite"
-        :name="recipe.name"
-        :img-name="recipe.imgName"
-      />
-    </div>
+  </div>
+  <hr class="mt-9 border-b border-dashed" />
+  <div class="mt-12 flex items-end">
+    <div class="text-2xl font-extrabold">Результаты поиска</div>
+    <div class="ml-5 flex font-sans">Найдено {{ recipesSearchResult.length }} рецептов</div>
+    <select
+      class="ml-auto p-2.5 bg-gray text-main text-base rounded hover:cursor-pointer active:border-0 focus:outline-none"
+      v-model="sortParameter"
+    >
+      <option value="popular" selected>сначала популярные</option>
+      <option value="fast">сначала быстрые</option>
+      <option value="long">сначала долгие</option>
+    </select>
+  </div>
+  <div class="mt-7 flex flex-wrap gap-x-12 gap-y-8">
+    <RecipeCard
+      v-for="recipe in recipesSearchResult"
+      :key="recipe.id"
+      :id="recipe.id"
+      :rating="recipe.rating"
+      :time="recipe.time"
+      :portions-number="recipe.portionsNumber"
+      :is-favorite="recipe.isFavorite"
+      :name="recipe.name"
+      :img-name="recipe.imgName"
+      :filters="recipe.filters"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
+  import { ref, watch, inject } from 'vue';
   import type { Ref } from 'vue';
 
   import axios, { type AxiosResponse } from 'axios';
@@ -96,7 +75,7 @@
     filters: string[];
   }
 
-  const searchString: Ref<string> = ref('');
+  const searchString: Ref<string> = inject('searchString', '');
   const filters: Ref<Array<Filter>> = ref([]);
   const recipesList: Ref<Array<RecipePreview>> = ref([]);
 

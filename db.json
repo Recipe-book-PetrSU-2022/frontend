@@ -69,10 +69,11 @@
       "portionsNumber": 4,
       "name": "Блины с творогом",
       "imgName": "blini-with-quark",
-      "isFavorite": true,
       "filters": [
-        "десерт"
-      ]
+        "десерт",
+        "холодное"
+      ],
+      "isFavorite": true
     },
     {
       "id": 2,
@@ -81,10 +82,10 @@
       "portionsNumber": 6,
       "name": "Борщ с яблоками",
       "imgName": "borscht-with-apples",
-      "isFavorite": false,
       "filters": [
         "десерт"
-      ]
+      ],
+      "isFavorite": false
     },
     {
       "id": 3,
@@ -93,7 +94,10 @@
       "portionsNumber": 8,
       "name": "Тирамису",
       "imgName": "tiramisu",
-      "isFavorite": false
+      "filters": [
+        "десерт"
+      ],
+      "isFavorite": true
     },
     {
       "id": 4,
@@ -102,7 +106,10 @@
       "portionsNumber": 12,
       "name": "Кексы с вишней",
       "imgName": "cupcakes-with-cherries",
-      "isFavorite": false
+      "isFavorite": false,
+      "filters": [
+        "десерт"
+      ]
     },
     {
       "id": 5,
@@ -111,12 +118,56 @@
       "portionsNumber": 1,
       "name": "Творог с бананом",
       "imgName": "cottage-cheese-with-banana",
-      "isFavorite": true,
       "filters": [
         "десерт"
-      ]
+      ],
+      "isFavorite": false
     }
   ],
+  "recipes": {
+    "1": {
+      "id": 1,
+      "name":"Блины с творогом",
+      "rating":4.3,
+      "filters":["десерт", "холодное"],
+      "time": 30,
+      "country": "Международный",
+      "type": "-",
+      "servings": 4,
+      "imgName": "blini-with-quark",
+      "ingredients": [{
+        "id": 1,
+        "name":"Индейка охлажд.",
+        "calories": 30,
+        "proteins": 34,
+        "fats": 54,
+        "carbohydrates": 21,
+        "capacity": 100
+      },
+      {
+        "id": 2,
+        "name": "Картофель.",
+        "calories": 30,
+        "proteins": 34,
+        "fats": 54,
+        "carbohydrates": 21,
+        "capacity": 200
+      }
+      ],
+      "stages": [
+        {
+          "id": 1,
+          "number": 1,
+          "description": "Это текст приготовления первого этапа. Нужно что-то сделать с индейкой, например, нарезать. Можно поплакать над её ценой, особенно, если ты студент(ка)."
+        },
+        {
+          "id": 2,
+          "number": 2,
+          "description": "Потом можно идти резать дешёвую картошку на другой доске. Радоваться тому, как она хорошо режется. Главное, не забывай про другую доску, а то прошлая от сырого мяса - бе."
+        }
+      ]
+    }
+  },
   "profile": {
     "name": "typicode"
   }

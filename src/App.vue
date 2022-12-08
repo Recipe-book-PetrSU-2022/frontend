@@ -1,13 +1,20 @@
 <template>
-  <div>
+  <div class="mx-auto flex-col max-w-6xl bg-main">
+    <TheHeader @search="updSearchString" />
     <router-view />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { useAuthStore } from '@/stores/auth';
+  import { ref, type Ref, provide } from 'vue';
+  import TheHeader from '@/components/TheHeader.vue';
 
-  const auth = useAuthStore();
+  const searchString: Ref<string> = ref('');
+  provide('searchString', searchString);
+
+  function updSearchString(search: string) {
+    searchString.value = search;
+  }
 </script>
 
 <style>

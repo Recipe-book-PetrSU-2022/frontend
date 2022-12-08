@@ -1,16 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Empty from '@/components/Empty.vue';
 import App from '@/App.vue';
 import login from '@/views/login.vue';
-import { useAuthStore } from '@/stores/auth';
 import MainPage from '@/views/MainPage.vue';
+import RecipePage from '@/views/RecipePage.vue';
 
 const routes = [
   {
     path: '/',
     name: 'Main',
     component: MainPage,
+  },
+  {
+    path: '/recipe/:id',
+    name: 'RecipePage',
+    component: RecipePage,
   },
   {
     path: '/login',
