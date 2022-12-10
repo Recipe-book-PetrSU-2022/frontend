@@ -73,7 +73,7 @@
         "десерт",
         "холодное"
       ],
-      "isFavorite": true
+      "isFavorite": false
     },
     {
       "id": 2,
@@ -127,32 +127,36 @@
   "recipes": {
     "1": {
       "id": 1,
-      "name":"Блины с творогом",
-      "rating":4.3,
-      "filters":["десерт", "холодное"],
+      "name": "Блины с творогом",
+      "rating": 4.3,
+      "filters": [
+        "десерт",
+        "холодное"
+      ],
       "time": 30,
       "country": "Международный",
       "type": "-",
       "servings": 4,
       "imgName": "blini-with-quark",
-      "ingredients": [{
-        "id": 1,
-        "name":"Индейка охлажд.",
-        "calories": 30,
-        "proteins": 34,
-        "fats": 54,
-        "carbohydrates": 21,
-        "capacity": 100
-      },
-      {
-        "id": 2,
-        "name": "Картофель.",
-        "calories": 30,
-        "proteins": 34,
-        "fats": 54,
-        "carbohydrates": 21,
-        "capacity": 200
-      }
+      "ingredients": [
+        {
+          "id": 1,
+          "name": "Индейка охлажд.",
+          "calories": 30,
+          "proteins": 34,
+          "fats": 54,
+          "carbohydrates": 21,
+          "capacity": 100
+        },
+        {
+          "id": 2,
+          "name": "Картофель.",
+          "calories": 30,
+          "proteins": 34,
+          "fats": 54,
+          "carbohydrates": 21,
+          "capacity": 200
+        }
       ],
       "stages": [
         {
