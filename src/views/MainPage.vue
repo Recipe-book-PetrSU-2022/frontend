@@ -113,11 +113,11 @@
 
   function sortRecipes(parameter: string) {
     if (parameter === 'popular') {
-      recipesList.value = recipesList.value.sort((a, b) => b.rating - a.rating);
+      recipesSearchResult.value = recipesSearchResult.value.sort((a, b) => b.rating - a.rating);
     } else if (parameter === 'fast') {
-      recipesList.value = recipesList.value.sort((a, b) => a.time - b.time);
+      recipesSearchResult.value = recipesSearchResult.value.sort((a, b) => a.time - b.time);
     } else {
-      recipesList.value = recipesList.value.sort((a, b) => b.time - a.time);
+      recipesSearchResult.value = recipesSearchResult.value.sort((a, b) => b.time - a.time);
     }
   }
 
