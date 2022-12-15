@@ -277,6 +277,23 @@
       ]
     }
   },
+  "users": [
+    {
+      "id": 1,
+      "name": "1",
+      "password": "1"
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "password": "2"
+    },
+    {
+      "id": 3,
+      "name": "vlad",
+      "password": "1"
+    }
+  ],
   "profile": {
     "name": "typicode"
   }
