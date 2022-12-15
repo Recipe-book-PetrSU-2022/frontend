@@ -1,0 +1,300 @@
+{
+  "searchFilters": [
+    {
+      "id": 1,
+      "name": "завтрак",
+      "isSelected": false
+    },
+    {
+      "id": 2,
+      "name": "обед",
+      "isSelected": false
+    },
+    {
+      "id": 3,
+      "name": "ужин",
+      "isSelected": false
+    },
+    {
+      "id": 4,
+      "name": "десерт",
+      "isSelected": false
+    },
+    {
+      "id": 5,
+      "name": "мясо",
+      "isSelected": false
+    },
+    {
+      "id": 6,
+      "name": "рыба",
+      "isSelected": false
+    },
+    {
+      "id": 7,
+      "name": "напитки",
+      "isSelected": false
+    },
+    {
+      "id": 8,
+      "name": "горячее",
+      "isSelected": false
+    },
+    {
+      "id": 9,
+      "name": "холодное",
+      "isSelected": false
+    },
+    {
+      "id": 10,
+      "name": "закуска",
+      "isSelected": false
+    },
+    {
+      "id": 11,
+      "name": "углеводы",
+      "isSelected": false
+    },
+    {
+      "id": 12,
+      "name": "выпечка",
+      "isSelected": false
+    }
+  ],
+  "recipesPreview": [
+    {
+      "id": 1,
+      "rating": 4.3,
+      "time": 30,
+      "portionsNumber": 4,
+      "name": "Блины с творогом",
+      "imgName": "blini-with-quark",
+      "filters": [
+        "десерт",
+        "холодное",
+        "завтрак",
+        "выпечка"
+      ],
+      "isFavorite": false
+    },
+    {
+      "id": 2,
+      "rating": 4.5,
+      "time": 150,
+      "portionsNumber": 6,
+      "name": "Борщ с яблоками",
+      "imgName": "borscht-with-apples",
+      "filters": [
+        "обед",
+        "горячее",
+        "углеводы"
+      ],
+      "isFavorite": false
+    },
+    {
+      "id": 3,
+      "rating": 4.5,
+      "time": 480,
+      "portionsNumber": 8,
+      "name": "Тирамису",
+      "imgName": "tiramisu",
+      "filters": [
+        "десерт",
+        "холодное",
+        "углеводы"
+      ],
+      "isFavorite": true
+    },
+    {
+      "id": 4,
+      "rating": 4.7,
+      "time": 50,
+      "portionsNumber": 12,
+      "name": "Кексы с вишней",
+      "imgName": "cupcakes-with-cherries",
+      "isFavorite": false,
+      "filters": [
+        "десерт",
+        "холодное",
+        "выпечка"
+      ]
+    },
+    {
+      "id": 5,
+      "rating": 4.9,
+      "time": 5,
+      "portionsNumber": 1,
+      "name": "Творог с бананом",
+      "imgName": "cottage-cheese-with-banana",
+      "filters": [
+        "десерт",
+        "завтрак",
+        "углеводы"
+      ],
+      "isFavorite": false
+    }
+  ],
+  "recipes": {
+    "1": {
+      "id": 1,
+      "name": "Блины с творогом",
+      "rating": 4.3,
+      "filters": [
+        "десерт",
+        "холодное",
+        "завтрак",
+        "выпечка"
+      ],
+      "time": 30,
+      "country": "Международный",
+      "type": "-",
+      "servings": 4,
+      "imgName": "blini-with-quark",
+      "ingredients": [
+        {
+          "id": 1,
+          "name": "Индейка охлажд.",
+          "calories": 30,
+          "proteins": 34,
+          "fats": 54,
+          "carbohydrates": 21,
+          "capacity": 100
+        },
+        {
+          "id": 2,
+          "name": "Картофель.",
+          "calories": 30,
+          "proteins": 34,
+          "fats": 54,
+          "carbohydrates": 21,
+          "capacity": 200
+        }
+      ],
+      "stages": [
+        {
+          "id": 1,
+          "number": 1,
+          "description": "Это текст приготовления первого этапа. Нужно что-то сделать с индейкой, например, нарезать. Можно поплакать над её ценой, особенно, если ты студент(ка)."
+        },
+        {
+          "id": 2,
+          "number": 2,
+          "description": "Потом можно идти резать дешёвую картошку на другой доске. Радоваться тому, как она хорошо режется. Главное, не забывай про другую доску, а то прошлая от сырого мяса - бе."
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "name": "Борщ с яблоками",
+      "rating": 4.5,
+      "filters": [
+        "обед",
+        "горячее",
+        "углеводы"
+      ],
+      "time": 150,
+      "country": "Россия",
+      "type": "-",
+      "servings": 6,
+      "imgName": "borscht-with-apples",
+      "ingredients": [
+        {
+          "id": 1,
+          "name": "Говядина",
+          "calories": 20,
+          "proteins": 54,
+          "fats": 14,
+          "carbohydrates": 11,
+          "capacity": 500
+        },
+        {
+          "id": 2,
+          "name": "Свекла",
+          "calories": 24,
+          "proteins": 34,
+          "fats": 4,
+          "carbohydrates": 21,
+          "capacity": 100
+        },
+        {
+          "id": 3,
+          "name": "Картофель.",
+          "calories": 30,
+          "proteins": 34,
+          "fats": 54,
+          "carbohydrates": 21,
+          "capacity": 200
+        },
+        {
+          "id": 4,
+          "name": "Морковь",
+          "calories": 24,
+          "proteins": 34,
+          "fats": 4,
+          "carbohydrates": 21,
+          "capacity": 100
+        },
+        {
+          "id": 5,
+          "name": "Лук",
+          "calories": 24,
+          "proteins": 34,
+          "fats": 4,
+          "carbohydrates": 21,
+          "capacity": 50
+        },
+        {
+          "id": 6,
+          "name": "Капуста",
+          "calories": 24,
+          "proteins": 34,
+          "fats": 4,
+          "carbohydrates": 21,
+          "capacity": 150
+        }
+      ],
+      "stages": [
+        {
+          "id": 1,
+          "number": 1,
+          "description": "Налейте в кастрюлю холодную воду, выложите мясо и поставьте на средний огонь. Бульон будет вкуснее, если использовать именно мясо на кости."
+        },
+        {
+          "id": 2,
+          "number": 2,
+          "description": "Вымойте и почистите свёклу, морковь и лук. Свёклу натрите на крупной тёрке, а морковь — на средней. Лук нарежьте небольшими кубиками.Налее масло в сковороду, включите средний огонь. Обжаривайте лук и морковь, помешивая, около 5 минут."
+        },
+        {
+          "id": 3,
+          "number": 3,
+          "description": "Когда бульон сварится, выньте из него мясо. Пока оно остывает, засыпьте в кастрюлю нашинкованную капусту. Через 5–10 минут добавьте нарезанный соломкой или кубиками картофель."
+        },
+        {
+          "id": 4,
+          "number": 4,
+          "description": "Ждите пока вода закипит. Для аромата можно добавить в кастрюлю немного измельчённого чеснока, молотой гвоздики или чёрного перца. Оставьте борщ под крышкой настаиваться 5–10 минут."
+        }
+      ]
+    }
+  },
+  "users": [
+    {
+      "id": 1,
+      "name": "1",
+      "password": "1"
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "password": "2"
+    },
+    {
+      "id": 3,
+      "name": "vlad",
+      "password": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
