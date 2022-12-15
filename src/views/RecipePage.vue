@@ -38,7 +38,7 @@
   </div>
   <hr class="mt-8 border-b border-dashed" />
   <div class="mt-8 text-2xl font-extrabold">Список ингредиентов</div>
-  <div class="mt-8 flex gap-2.5">
+  <div class="mt-8 flex flex-wrap gap-2.5">
     <div
       v-for="ingredient in recipe?.ingredients"
       :key="ingredient.id"

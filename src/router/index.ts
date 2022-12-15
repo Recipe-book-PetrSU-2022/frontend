@@ -1,9 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
+import { useAuthStore } from '@/stores/auth';
+
 import App from '@/App.vue';
-import login from '@/views/login.vue';
+import Login from '@/views/Login.vue';
 import MainPage from '@/views/MainPage.vue';
 import RecipePage from '@/views/RecipePage.vue';
+import NotFound from '@/components/NotFound.vue';
+import SignUp from '@/views/SignUp.vue';
 
 const routes = [
   {
@@ -22,12 +26,34 @@ const routes = [
     // eslint-disable-next-line consistent-return
     // redirect: () => {
     //   const authStore = useAuthStore();
+    //   console.log(authStore, authStore.isAuthorized);
 
-    //   if (authStore.isUserAuthorized()) {
-    //     return { name: 'Main' };
+    //   if (authStore.isAuthorized) {
+    //     return '/';
     //   }
     // },
-    component: login,
+    component: Login,
+  },
+  {
+    path: '/registration',
+    name: 'SignUp',
+    // eslint-disable-next-line consistent-return
+    // redirect: () => {
+    //   const authStore = useAuthStore();
+    //   console.log(authStore, authStore.isAuthorized);
+
+    //   if (authStore.isAuthorized) {
+    //     return '/';
+    //   }
+    // },
+    component: SignUp,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound,
+    redirect: () => {
+      return { name: 'Main' };
+    },
   },
 ];
 

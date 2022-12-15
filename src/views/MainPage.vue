@@ -91,7 +91,7 @@
 
     if (searchString.value !== '') {
       recipesSearchResult.value = recipesSearchResult.value.filter(
-        (item) => item.name.indexOf(searchString.value) !== -1,
+        (item) => item.name.toLowerCase().indexOf(searchString.value.toLowerCase()) !== -1,
       );
     }
 

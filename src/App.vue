@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto flex-col max-w-6xl bg-main">
+  <div class="mx-auto flex-col max-w-6xl">
     <TheHeader @search="updSearchString" />
     <router-view />
   </div>

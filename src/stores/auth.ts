@@ -9,9 +9,6 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
-    isUserAuthorized() {
-      return this.isAuthorized;
-    },
 
     setUserAuth(authStatus: boolean) {
       this.isAuthorized = authStatus;
