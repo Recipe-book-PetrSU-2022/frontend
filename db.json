@@ -292,6 +292,11 @@
       "id": 3,
       "name": "vlad",
       "password": "1"
+    },
+    {
+      "id": 4,
+      "name": "",
+      "password": ""
     }
   ],
   "profile": {
