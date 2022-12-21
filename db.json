@@ -89,7 +89,7 @@
         "горячее",
         "углеводы"
       ],
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": 3,
@@ -112,12 +112,12 @@
       "portionsNumber": 12,
       "name": "Кексы с вишней",
       "imgName": "cupcakes-with-cherries",
-      "isFavorite": false,
       "filters": [
         "десерт",
         "холодное",
         "выпечка"
-      ]
+      ],
+      "isFavorite": true
     },
     {
       "id": 5,
@@ -292,6 +292,11 @@
       "id": 3,
       "name": "vlad",
       "password": "1"
+    },
+    {
+      "id": 4,
+      "name": "",
+      "password": ""
     }
   ],
   "profile": {

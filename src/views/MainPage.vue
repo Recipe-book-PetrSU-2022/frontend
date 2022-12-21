@@ -75,9 +75,10 @@
     filters: string[];
   }
 
+  const recipesList: Ref<Array<RecipePreview>> = ref([]);
+
   const searchString: Ref<string> = inject('searchString', '');
   const filters: Ref<Array<Filter>> = ref([]);
-  const recipesList: Ref<Array<RecipePreview>> = ref([]);
 
   const recipesSearchResult: Ref<Array<RecipePreview>> = ref([]);
   const selectedFilters: Ref<Array<Filter>> = ref([]);

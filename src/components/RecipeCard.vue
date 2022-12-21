@@ -12,6 +12,7 @@
           <vue-feather type="star" size="9" />
         </div>
         <div
+          v-if="authStore.isAuthorized"
           class="w-9 h-6 flex items-center justify-center bg-main border border-gray rounded-tr rounded-bl hover:cursor-pointer hover:outline hover:outline-1"
           @click.stop="addToFavorite"
         >
@@ -58,6 +59,7 @@
     filters: Array as PropType<String[]>,
   });
 
+  const authStore = useAuthStore();
   const router = useRouter();
   const isFavoriteLocal: Ref<boolean> = ref(false);
 

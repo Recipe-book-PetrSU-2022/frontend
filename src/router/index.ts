@@ -8,6 +8,7 @@ import MainPage from '@/views/MainPage.vue';
 import RecipePage from '@/views/RecipePage.vue';
 import NotFound from '@/components/NotFound.vue';
 import SignUp from '@/views/SignUp.vue';
+import PersonalCabinet from '@/views/PersonalCabinet.vue';
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/recipe/:id',
     name: 'RecipePage',
     component: RecipePage,
+  },
+  {
+    path: '/cabinet',
+    name: 'RecipePage',
+    component: PersonalCabinet,
   },
   {
     path: '/login',

@@ -89,7 +89,7 @@
         "горячее",
         "углеводы"
       ],
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "id": 3,
@@ -292,6 +292,11 @@
       "id": 3,
       "name": "vlad",
       "password": "1"
+    },
+    {
+      "id": 4,
+      "name": "",
+      "password": ""
     }
   ],
   "profile": {
