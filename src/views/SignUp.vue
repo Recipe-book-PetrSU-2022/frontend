@@ -7,11 +7,11 @@
       class="mt-8 pl-2.5 block w-72 h-9 border border-gray rounded placeholder:font-sans"
       placeholder="Введите логин..."
     />
-    <!-- <input
-      v-model="password"
+    <input
+      v-model="email"
       class="mt-2.5 pl-2.5 block w-72 h-9 border border-gray rounded placeholder:font-sans"
       placeholder="Введите почту..."
-    /> -->
+    />
     <input
       v-model="password1"
       class="mt-2.5 pl-2.5 block w-72 h-9 border border-gray rounded placeholder:font-sans"
@@ -53,8 +53,8 @@
 
   import axios, { type AxiosResponse } from 'axios';
 
-  const userCount: Ref<number> = ref(0);
   const username: Ref<string> = ref('');
+  const email: Ref<string> = ref('');
   const password1: Ref<string> = ref('');
   const password2: Ref<string> = ref('');
 
@@ -67,44 +67,30 @@
   }
 
   async function signUp() {
+    console.log(username.value);
+
     // users count
     await axios
-      .get('/users', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      .get('http://157.230.103.196:1337/signup', {
+        login: username.value,
+        email: email.value,
+        password: password1.value,
+        confirm_password: password2.value,
       })
-      .then((res: AxiosResponse<User[]>) => {
-        userCount.value = res.data.length;
+      .then((res) => {
+        console.log(res);
 
-        const user: User[] = res.data.filter((item) => item.name === username.value);
-
-        if (user.length > 0) {
-          hasAuthErrorDuplicateLogin.value = true;
-          setTimeout(() => {
-            hasAuthErrorDuplicateLogin.value = false;
-          }, 2 * 1000);
-        } else if (password1.value !== password2.value) {
-          hasAuthErrorPasswordNotEqual.value = true;
-          setTimeout(() => {
-            hasAuthErrorPasswordNotEqual.value = false;
-          }, 2 * 1000);
-        }
-
-        if (!hasAuthErrorDuplicateLogin.value && !hasAuthErrorPasswordNotEqual.value) {
-          axios
-            .post('/users', {
-              id: userCount.value + 1,
-              name: username.value,
-              password: password1.value,
-            })
-            .then(() => {
-              auth.setUserAuth(true);
-              router.push({
-                name: 'Main',
-              });
-            });
-        }
+        // if (user.length > 0) {
+        //   hasAuthErrorDuplicateLogin.value = true;
+        //   setTimeout(() => {
+        //     hasAuthErrorDuplicateLogin.value = false;
+        //   }, 2 * 1000);
+        // } else if (password1.value !== password2.value) {
+        //   hasAuthErrorPasswordNotEqual.value = true;
+        //   setTimeout(() => {
+        //     hasAuthErrorPasswordNotEqual.value = false;
+        //   }, 2 * 1000);
+        // }
       });
   }
 
