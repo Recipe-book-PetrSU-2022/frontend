@@ -1,7 +1,6 @@
 <template>
-  <div class="mt-12 text-2xl font-extrabold">Фильтры поиска</div>
+  <!-- <div class="mt-12 text-2xl font-extrabold">Фильтры поиска</div>
   <div class="mt-8 flex flex-wrap gap-2.5">
-    <!-- eslint-disable-next-line vue/require-v-for-key-->
     <div
       v-for="filter in filters"
       :key="filter.name + 1"
@@ -17,8 +16,8 @@
         <vue-feather type="x" size="18" />
       </div>
     </div>
-  </div>
-  <hr class="mt-9 border-b border-dashed" />
+  </div> -->
+  <!-- <hr class="mt-9 border-b border-dashed" /> -->
   <div class="mt-12 flex items-end">
     <div class="text-2xl font-extrabold">Результаты поиска</div>
     <div class="ml-5 flex font-sans">Найдено {{ recipesSearchResult.length }} рецептов</div>
@@ -26,22 +25,22 @@
       class="ml-auto p-2.5 bg-gray text-main text-base rounded hover:cursor-pointer active:border-0 focus:outline-none"
       v-model="sortParameter"
     >
-      <option value="popular" selected>сначала популярные</option>
-      <option value="fast">сначала быстрые</option>
+      <!-- <option value="popular" selected>сначала популярные</option> -->
+      <option value="fast" selected>сначала быстрые</option>
       <option value="long">сначала долгие</option>
     </select>
   </div>
   <div class="mt-7 flex flex-wrap gap-x-12 gap-y-8">
     <RecipeCard
       v-for="recipe in recipesSearchResult"
-      :key="recipe.id"
-      :id="recipe.id"
-      :rating="recipe.rating"
-      :time="recipe.time"
-      :portions-number="recipe.portionsNumber"
+      :key="recipe.ID"
+      :id="recipe.ID"
+      :rating="-1"
+      :time="recipe.IntTime"
+      :portions-number="recipe.IntServings"
       :is-favorite="recipe.isFavorite"
-      :name="recipe.name"
-      :img-name="recipe.imgName"
+      :name="recipe.StrRecipeName"
+      :img-name="recipe.StrRecipeImage"
       :filters="recipe.filters"
     />
   </div>
@@ -65,13 +64,13 @@
   }
 
   interface RecipePreview {
-    id: number;
-    name: string;
-    time: number;
+    ID: number;
+    StrRecipeName: string;
+    IntTime: number;
     rating: number;
-    portionsNumber: number;
+    IntServings: number;
     isFavorite: boolean;
-    imgName: string;
+    StrRecipeImage: string;
     filters: string[];
   }
 
@@ -83,7 +82,7 @@
   const recipesSearchResult: Ref<Array<RecipePreview>> = ref([]);
   const selectedFilters: Ref<Array<Filter>> = ref([]);
 
-  const sortParameter: Ref<string> = ref('popular');
+  const sortParameter: Ref<string> = ref('fast');
 
   watch(searchString, () => searchRecipes());
 
@@ -92,7 +91,7 @@
 
     if (searchString.value !== '') {
       recipesSearchResult.value = recipesSearchResult.value.filter(
-        (item) => item.name.toLowerCase().indexOf(searchString.value.toLowerCase()) !== -1,
+        (item) => item.StrRecipeName.toLowerCase().indexOf(searchString.value.toLowerCase()) !== -1,
       );
     }
 
@@ -114,28 +113,28 @@
 
   function sortRecipes(parameter: string) {
     if (parameter === 'popular') {
-      recipesSearchResult.value = recipesSearchResult.value.sort((a, b) => b.rating - a.rating);
+      // recipesSearchResult.value = recipesSearchResult.value.sort((a, b) => b.rating - a.rating);
     } else if (parameter === 'fast') {
-      recipesSearchResult.value = recipesSearchResult.value.sort((a, b) => a.time - b.time);
+      recipesSearchResult.value = recipesSearchResult.value.sort((a, b) => a.IntTime - b.IntTime);
     } else {
-      recipesSearchResult.value = recipesSearchResult.value.sort((a, b) => b.time - a.time);
+      recipesSearchResult.value = recipesSearchResult.value.sort((a, b) => b.IntTime - a.IntTime);
     }
   }
 
-  axios
-    .get('/searchFilters', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((res: AxiosResponse<Array<Filter>>) => {
-      filters.value = res.data;
-    });
+  // axios
+  //   .get('/searchFilters', {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //   .then((res: AxiosResponse<Array<Filter>>) => {
+  //     filters.value = res.data;
+  //   });
 
   axios
-    .get('/recipesPreview', {
+    .get('http://157.230.103.196:1337/recipe/all', {
       headers: {
-        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     })
     .then((res: AxiosResponse<Array<RecipePreview>>) => {

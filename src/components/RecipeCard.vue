@@ -6,6 +6,7 @@
     <div class="relative mt-2.5 w-[170px] h-44 rounded">
       <div class="relative z-10 flex justify-between">
         <div
+          v-if="props.rating !== -1"
           class="w-11 h-6 flex gap-0.5 items-center bg-main border border-gray font-bold rounded-tl rounded-br"
         >
           <span class="ml-1.5">{{ props.rating }}</span>
@@ -68,7 +69,7 @@
   }
 
   function getImgUrl(imgName: string) {
-    return new URL(`../assets/icons/recipesPreview/${imgName}.svg`, import.meta.url).href;
+    return `http://157.230.103.196:1337/assets/${imgName}`;
   }
 
   function addToFavorite() {
