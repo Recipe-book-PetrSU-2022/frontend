@@ -2,6 +2,7 @@
 import type { Ref } from 'vue';
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -9,14 +10,27 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+    checkAuth() {
+      if (localStorage.getItem('token')) {
+        this.isAuthorized = true;
+        axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
+      }
+    },
 
-    setUserAuth(authStatus: boolean) {
+    setUserAuth(authStatus: boolean, token: string) {
       this.isAuthorized = authStatus;
+
+      if (token) {
+        localStorage.setItem('token', token);
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      } else {
+        this.signOut();
+      }
     },
 
     signOut() {
-      document.cookie = `session=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
-      this.setUserAuth(false);
+      localStorage.removeItem('token');
+      this.setUserAuth(false, '');
     },
   },
 });

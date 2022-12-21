@@ -60,7 +60,7 @@
   watch(searchString, () => emit('search', searchString.value));
 
   function signOut() {
-    authStore.setUserAuth(false);
+    authStore.setUserAuth(false, '');
     router.push({ name: 'Login' });
   }
 </script>

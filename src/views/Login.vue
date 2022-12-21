@@ -52,29 +52,24 @@
   async function signIn() {
     // users count
     await axios
-      .get('/users', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      .post('http://157.230.103.196:1337/signin', {
+        login: username.value,
+        password: password.value,
       })
-      .then((res: AxiosResponse<User[]>) => {
-        const user: User[] = res.data.filter(
-          (item) => item.name === username.value && item.password === password.value,
-        );
+      .then((res) => {
+        auth.setUserAuth(true, res.data.token);
 
-        if (user.length > 0) {
-          auth.setUserAuth(true);
-          router.push({
-            name: 'Main',
-          });
-        } else {
-          auth.setUserAuth(false);
+        router.push({
+          name: 'Main',
+        });
+      })
+      .catch(() => {
+        auth.setUserAuth(false, '');
 
-          hasAuthError.value = true;
-          setTimeout(() => {
-            hasAuthError.value = false;
-          }, 2 * 1000);
-        }
+        hasAuthError.value = true;
+        setTimeout(() => {
+          hasAuthError.value = false;
+        }, 2 * 1000);
       });
   }
 
