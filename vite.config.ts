@@ -13,13 +13,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  // server: {
-  //   proxy: {
-  //     '/api': {
-  //       target: 'http://192.168.126.2/',
-  //       changeOrigin: true,
-  //       secure: false,
-  //     },
-  //   },
-  // },
+  server: {
+    proxy: {
+      '^/recipe': {
+        target: 'http://157.230.103.196:1337/',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });

@@ -23,7 +23,7 @@ const routes = [
   },
   {
     path: '/cabinet',
-    name: 'RecipePage',
+    name: 'PersonalCabinet',
     component: PersonalCabinet,
   },
   {

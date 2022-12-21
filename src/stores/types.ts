@@ -1,29 +1,55 @@
+// export interface Recipe {
+//   id: number;
+//   name: string;
+//   servings: number;
+//   time: number;
+//   country: string;
+//   type: string;
+//   rating: number;
+//   imgName: string;
+//   filters: string[];
+//   ingredients: Ingredient[];
+//   stages: Stage[];
+// }
+
 export interface Recipe {
-  id: number;
-  name: string;
-  servings: number;
-  time: number;
-  country: string;
-  type: string;
+  ID: number;
+  StrRecipeName: string;
+  IntTime: number;
   rating: number;
-  imgName: string;
+  IntServings: number;
+  isFavorite: boolean;
+  StrRecipeImage: string;
+  StrRecipeCountry: string;
+  StrRecipeType: string;
   filters: string[];
-  ingredients: Ingredient[];
-  stages: Stage[];
+  RecipeStages: Stage[];
+  RecipeIngredients: IngredientDescription[];
+  RecipeComments: Comment[];
+}
+export interface Comment {
+  ID: number;
+  UpdatedAt: string;
+  IntRate: number;
+  StrCommentDesc: string;
 }
 
 export interface Ingredient {
-  id: number;
-  name: string;
-  calories: number;
-  proteins: number;
-  fats: number;
-  carbohydrates: number;
-  capacity: string | number;
+  ID: number;
+  StrIngredientName: string;
+  IntCalories: number;
+  IntProteins: number;
+  IntFats: number;
+  IntCarbohydrates: number;
+}
+
+export interface IngredientDescription {
+  ID: number;
+  IntGrams: number;
+  Ingredient: Ingredient;
 }
 
 export interface Stage {
   id: number;
-  description: string;
-  number: number;
+  StrStageDesc: string;
 }

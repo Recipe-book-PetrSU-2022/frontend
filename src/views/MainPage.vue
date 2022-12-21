@@ -49,6 +49,7 @@
 <script setup lang="ts">
   import { ref, watch, inject } from 'vue';
   import type { Ref } from 'vue';
+  import type { Recipe } from '@/stores/types';
 
   import axios, { type AxiosResponse } from 'axios';
 
@@ -63,23 +64,12 @@
     bgColor?: string;
   }
 
-  interface RecipePreview {
-    ID: number;
-    StrRecipeName: string;
-    IntTime: number;
-    rating: number;
-    IntServings: number;
-    isFavorite: boolean;
-    StrRecipeImage: string;
-    filters: string[];
-  }
-
-  const recipesList: Ref<Array<RecipePreview>> = ref([]);
+  const recipesList: Ref<Array<Recipe>> = ref([]);
 
   const searchString: Ref<string> = inject('searchString', '');
   const filters: Ref<Array<Filter>> = ref([]);
 
-  const recipesSearchResult: Ref<Array<RecipePreview>> = ref([]);
+  const recipesSearchResult: Ref<Array<Recipe>> = ref([]);
   const selectedFilters: Ref<Array<Filter>> = ref([]);
 
   const sortParameter: Ref<string> = ref('fast');
@@ -137,7 +127,7 @@
         'Access-Control-Allow-Origin': '*',
       },
     })
-    .then((res: AxiosResponse<Array<RecipePreview>>) => {
+    .then((res: AxiosResponse<Array<Recipe>>) => {
       recipesList.value = res.data;
       recipesSearchResult.value = res.data;
     });
