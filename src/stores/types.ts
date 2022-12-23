@@ -26,6 +26,7 @@ export interface Recipe {
   RecipeStages: Stage[];
   RecipeIngredients: IngredientDescription[];
   RecipeComments: Comment[];
+  BoolRecipeVisibility: boolean;
 }
 export interface Comment {
   ID: number;
@@ -47,9 +48,11 @@ export interface IngredientDescription {
   ID: number;
   IntGrams: number;
   Ingredient: Ingredient;
+  isMouseOnIngredient: boolean;
 }
 
 export interface Stage {
-  id: number;
+  ID: number;
   StrStageDesc: string;
+  index: number;
 }

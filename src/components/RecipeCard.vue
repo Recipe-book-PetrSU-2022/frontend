@@ -5,21 +5,21 @@
   >
     <div class="relative mt-2.5 w-[170px] h-44 rounded">
       <div class="relative z-10 flex justify-between">
-        <div
+        <!-- <div
           v-if="props.rating !== -1"
           class="w-11 h-6 flex gap-0.5 items-center bg-main border border-gray font-bold rounded-tl rounded-br"
         >
           <span class="ml-1.5">{{ props.rating }}</span>
           <vue-feather type="star" size="9" />
-        </div>
-        <div
+        </div> -->
+        <!-- <div
           v-if="authStore.isAuthorized"
           class="w-9 h-6 flex items-center justify-center bg-main border border-gray rounded-tr rounded-bl hover:cursor-pointer hover:outline hover:outline-1"
           @click.stop="addToFavorite"
         >
           <vue-feather v-if="!isFavoriteLocal" type="bookmark" size="20" />
           <vue-feather v-else type="bookmark" fill="#EA7F70" size="20" />
-        </div>
+        </div> -->
       </div>
       <img class="absolute top-0 select-none" :src="getImgUrl(props.imgName)" alt="" />
     </div>
@@ -69,7 +69,11 @@
   }
 
   function getImgUrl(imgName: string) {
-    return `http://157.230.103.196:1337/assets/${imgName}`;
+    if (imgName) {
+      return `http://157.230.103.196:1337/assets/${imgName}`;
+    }
+
+    return new URL(`../assets/recipe.svg`, import.meta.url).href;
   }
 
   function addToFavorite() {

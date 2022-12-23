@@ -29,10 +29,10 @@
       >Данный логин уже зарегистрирован
     </div>
     <div
-      v-if="hasAuthErrorPasswordNotEqual"
+      v-if="error !== ''"
       class="pl-1 mt-2.5 text-md text-red-700 font-medium font-sans rounded-lg"
       role="alert"
-      >Пароли не совпадают
+      >{{ error }}
     </div>
     <div class="mt-2.5 mx-auto w-44 h-10 flex justify-center bg-gray rounded hover:opacity-90">
       <button class="text-main font-sans" @click="signUp">Зарегистрироваться</button>
@@ -57,6 +57,7 @@
   const email: Ref<string> = ref('');
   const password1: Ref<string> = ref('');
   const password2: Ref<string> = ref('');
+  const error = ref('');
 
   const auth = useAuthStore();
   const router = useRouter();
@@ -67,18 +68,16 @@
   }
 
   async function signUp() {
-    console.log(username.value);
-
     // users count
     await axios
-      .get('http://157.230.103.196:1337/signup', {
+      .post('http://157.230.103.196:1337/signup', {
         login: username.value,
         email: email.value,
         password: password1.value,
         confirm_password: password2.value,
       })
       .then((res) => {
-        console.log(res);
+        router.push({ name: 'Main' });
 
         // if (user.length > 0) {
         //   hasAuthErrorDuplicateLogin.value = true;
@@ -91,6 +90,12 @@
         //     hasAuthErrorPasswordNotEqual.value = false;
         //   }, 2 * 1000);
         // }
+      })
+      .catch((err) => {
+        error.value = err.response.data.message;
+        setTimeout(() => {
+          error.value = '';
+        }, 2 * 1000);
       });
   }
 

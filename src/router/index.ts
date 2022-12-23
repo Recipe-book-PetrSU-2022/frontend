@@ -9,6 +9,7 @@ import RecipePage from '@/views/RecipePage.vue';
 import NotFound from '@/components/NotFound.vue';
 import SignUp from '@/views/SignUp.vue';
 import PersonalCabinet from '@/views/PersonalCabinet.vue';
+import CreateRecipe from '@/views/RecipeCreate.vue';
 
 const routes = [
   {
@@ -22,9 +23,26 @@ const routes = [
     component: RecipePage,
   },
   {
+    path: '/recipe-create/:id',
+    name: 'RecipeCreate',
+    component: CreateRecipe,
+    props: true,
+  },
+  {
     path: '/cabinet',
     name: 'PersonalCabinet',
     component: PersonalCabinet,
+    // eslint-disable-next-line consistent-return
+    beforeEnter(to, from, next) {
+      const authStore = useAuthStore();
+      console.log(authStore, authStore.isAuthorized);
+
+      if (!authStore.isAuthorized) {
+        next('/');
+      } else {
+        next();
+      }
+    },
   },
   {
     path: '/login',

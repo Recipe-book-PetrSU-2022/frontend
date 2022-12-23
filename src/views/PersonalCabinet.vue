@@ -2,7 +2,7 @@
   <div class="mt-12 flex-col">
     <div class="flex gap-11">
       <img class="py-11 px-12 border" src="@/assets/profile.svg" />
-      <div v-if="!isEditMode" class="mt-8 flex flex-col gap-12">
+      <!-- <div v-if="!isEditMode" class="mt-8 flex flex-col gap-12">
         <div class="flex-col gap-1">
           <div class="flex">
             <span class="font-extrabold">Логин:</span>
@@ -95,7 +95,7 @@
             <vue-feather type="check" size="16" stroke="white" />
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <hr class="mt-8 border-b border-dashed" />
     <div class="mt-8 text-2xl font-extrabold">Мои рецепты</div>
@@ -103,26 +103,67 @@
       <div class="py-2.5 px-2.5 h-72 border border-gray rounded hover:cursor-pointer">
         <div
           class="stroke w-[190px] h-full flex flex-col items-center justify-center bg-light-green"
+          @click="router.push({ name: 'RecipeCreate', params: { id: -1 } })"
         >
           <vue-feather type="plus" size="28" />
           <div class="mt-4 w-20 flex justify-center text-2xl font-extrabold">Новый рецепт</div>
         </div>
       </div>
       <div class="overflow-auto flex gap-x-14 gap-y-8">
-        <RecipeCard
+        <div
           v-for="recipe in recipesList"
-          :key="recipe.id"
-          :id="recipe.id"
-          :rating="recipe.rating"
-          :time="recipe.time"
-          :portions-number="recipe.portionsNumber"
-          :is-favorite="recipe.isFavorite"
-          :name="recipe.name"
-          :img-name="recipe.imgName"
-          :filters="recipe.filters"
-        />
+          :key="recipe.ID"
+          @mouseover="recipe.isMouseOnRecipe = true"
+          @mouseleave="recipe.isMouseOnRecipe = false"
+        >
+          <div
+            v-if="recipe.isMouseOnRecipe"
+            class="px-2.5 py-2.5 flex flex-col gap-2.5 border border-gray rounded"
+          >
+            <div
+              class="delete-stroke px-2.5 w-[170px] h-[131px] flex flex-col gap-2.5 items-center justify-center rounded bg-light-yellow border border-gray hover:cursor-pointer"
+              @click="
+                router.push({
+                  name: 'RecipeCreate',
+                  params: { id: recipe.ID },
+                })
+              "
+            >
+              <vue-feather class="w-14 h-8" type="edit-2" size="25" fill="black" />
+              <div class="ml-3 text-2xl font-extrabold">Изменить</div>
+            </div>
+            <div
+              class="delete-stroke px-2.5 w-[170px] h-[131px] flex flex-col gap-2.5 items-center justify-center rounded bg-light-red border border-gray hover:cursor-pointer"
+              @click="acceptRemoveRecipe(recipe)"
+            >
+              <vue-feather class="w-14 h-8" type="trash" size="25" fill="black" />
+              <div class="ml-3 text-2xl font-extrabold text-center"> Удалить рецепт </div>
+            </div>
+          </div>
+          <RecipeCard
+            v-else
+            :key="recipe.ID"
+            :id="recipe.ID"
+            :rating="recipe.rating"
+            :time="recipe.IntTime"
+            :portions-number="recipe.IntServings"
+            :is-favorite="recipe.isFavorite"
+            :name="recipe.StrRecipeName"
+            :img-name="recipe.StrRecipeImage"
+            :filters="recipe.filters"
+          />
+        </div>
       </div>
     </div>
+    <Teleport to="body">
+      <!-- use the modal component, pass in the prop -->
+      <modal
+        :show="showModal"
+        @yes="removeRecipe"
+        @no="showModal = false"
+        text="Вы уверены, что хотите удалить рецепт?"
+        icon="trash"
+    /></Teleport>
   </div>
 </template>
 
@@ -134,42 +175,89 @@
 
   import axios, { type AxiosResponse } from 'axios';
 
-  import { useRoute } from 'vue-router';
+  import { routeLocationKey, useRoute, useRouter } from 'vue-router';
+  import Modal from '@/components/Modal.vue';
 
-  const route = useRoute();
+  const showModal = ref(false);
+
+  const router = useRouter();
 
   const recipe: Ref<Recipe | null> = ref(null);
 
+  const deleteRecipe: Ref<Recipe | null> = ref(null);
+
   const isEditMode: Ref<boolean> = ref(false);
+  const open = ref(false);
 
   interface RecipePreview {
-    id: number;
-    name: string;
-    time: number;
+    ID: number;
+    StrRecipeName: string;
+    IntTime: number;
     rating: number;
-    portionsNumber: number;
+    IntServings: number;
     isFavorite: boolean;
-    imgName: string;
+    StrRecipeImage: string;
     filters: string[];
+    isMouseOnRecipe: boolean;
   }
 
   const recipesList: Ref<Array<RecipePreview>> = ref([]);
 
-  axios
-    .get('/recipesPreview', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((res: AxiosResponse<Array<RecipePreview>>) => {
-      recipesList.value = res.data;
-    });
+  // axios.get('http://157.230.103.196:1337/ingredient/all').then((res) => {
+  //   console.log(res);
+
+  //   recipesList.value = res.data;
+  // });
+  axios.get('http://157.230.103.196:1337/my-recipe/all').then((res) => {
+    recipesList.value = res.data;
+    recipesList.value.forEach((item) => (item.isMouseOnRecipe = false));
+  });
+
+  async function removeRecipe() {
+    await axios
+      .delete(`http://157.230.103.196:1337/my-recipe/delete/${deleteRecipe.value.ID}`)
+      .then((res) => {});
+
+    axios
+      .get('http://157.230.103.196:1337/my-recipe/all')
+      .then((res) => {
+        recipesList.value = res.data;
+        recipesList.value.forEach((item) => (item.isMouseOnRecipe = false));
+      })
+      .finally(() => (showModal.value = false));
+  }
+
+  function acceptRemoveRecipe(recipe: RecipePreview) {
+    deleteRecipe.value = recipe;
+    showModal.value = true;
+  }
+
+  // function editRecipe(recipeItem: RecipePreview) {
+  //   console.log(recipeItem);
+  //   router.push({ name: 'RecipeCreate' });
+  // }
 </script>
 <style lang="scss">
   .stroke {
     position: relative;
   }
   .stroke::before {
+    content: '';
+    background-image: url('@/assets/stroke.png');
+    background-size: contain;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.1;
+  }
+
+  .delete-stroke {
+    position: relative;
+  }
+
+  .delete-stroke:hover:before {
     content: '';
     background-image: url('@/assets/stroke.png');
     background-size: contain;

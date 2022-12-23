@@ -34,25 +34,38 @@
     <div v-else class="ml-auto mr-1 flex gap-2.5">
       <button
         class="w-10 h-9 flex items-center justify-center bg-gray rounded hover:cursor-pointer"
-        @click="signOut"
+        @click="showModal = true"
       >
         <vue-feather type="log-out" size="20" stroke="white" />
       </button>
       <button
         class="w-9 h-9 flex items-center justify-center border border-gray rounded hover:cursor-pointer"
+        @click="router.push({ name: 'PersonalCabinet' })"
       >
         <vue-feather type="user" size="20" stroke="gray" fill="gray" />
       </button>
     </div>
   </div>
+  <Teleport to="body">
+    <!-- use the modal component, pass in the prop -->
+    <Modal
+      :show="showModal"
+      @yes="signOut"
+      @no="showModal = false"
+      text="Вы уверены, что хотите выйти?"
+      icon="log-out"
+  /></Teleport>
 </template>
 <script lang="ts" setup>
   import { watch, ref, type Ref } from 'vue';
   import { useAuthStore } from '@/stores/auth';
   import { useRouter } from 'vue-router';
+  import Modal from '@/components/Modal.vue';
 
   const authStore = useAuthStore();
   const router = useRouter();
+
+  const showModal = ref(false);
   // eslint-disable-next-line no-undef
   const emit = defineEmits(['search']);
   const searchString: Ref<string> = ref('');
@@ -61,6 +74,8 @@
 
   function signOut() {
     authStore.setUserAuth(false, '');
-    router.push({ name: 'Login' });
+    showModal.value = false;
+
+    router.push({ name: 'Main' });
   }
 </script>

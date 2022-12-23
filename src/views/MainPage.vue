@@ -31,7 +31,9 @@
     </select>
   </div>
   <div class="mt-7 flex flex-wrap gap-x-12 gap-y-8">
+    <div v-if="recipesSearchResult.length === 0">По вашему запросу ничего не найдено!</div>
     <RecipeCard
+      v-else
       v-for="recipe in recipesSearchResult"
       :key="recipe.ID"
       :id="recipe.ID"
