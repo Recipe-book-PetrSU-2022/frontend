@@ -1,7 +1,7 @@
 <template>
   <div class="mt-12 flex-col">
     <div class="flex gap-11">
-      <img class="py-11 px-12 border" src="@/assets/profile.svg" />
+      <img class="py-11 px-12 border" :src="getImgUrl('profile')" />
       <!-- <div v-if="!isEditMode" class="mt-8 flex flex-col gap-12">
         <div class="flex-col gap-1">
           <div class="flex">
@@ -230,6 +230,10 @@
   function acceptRemoveRecipe(recipe: RecipePreview) {
     deleteRecipe.value = recipe;
     showModal.value = true;
+  }
+
+  function getImgUrl(imgName: string | undefined) {
+    return new URL(`../assets/${imgName}.svg`, import.meta.url).href;
   }
 
   // function editRecipe(recipeItem: RecipePreview) {
